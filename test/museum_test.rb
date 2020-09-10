@@ -28,19 +28,23 @@ class MuseumTest < Minitest::Test
   def test_it_can_add_exhibits
     assert_empty @dmns.exhibits
 
-    @dmns.add_exhibit(gems_and_minerals)
-    @dmns.add_exhibit(dead_sea_scrolls)
-    @dmns.add_exhibit(imax)
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
 
     expected = [@gems_and_minerals, @dead_sea_scrolls, @imax]
     assert_equal expected, @dmns.exhibits
   end
 
   def test_it_can_recommend_exhibits_to_patrons
-    p1_expected = expected = [@gems_and_minerals, @dead_sea_scrolls]
-    p2_expected = expected = [@imax]
-    
-    assert_equal p1_expected, @dmns.recommend_exhibits(patron_1)
-    assert_equal p2_expected, @dmns.recommend_exhibits(patron_2)
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+
+    p1_expected = [@gems_and_minerals, @dead_sea_scrolls]
+    p2_expected = [@imax]
+
+    assert_equal p1_expected, @dmns.recommend_exhibits(@patron_1)
+    assert_equal p2_expected, @dmns.recommend_exhibits(@patron_2)
   end
 end
