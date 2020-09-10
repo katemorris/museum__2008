@@ -20,4 +20,18 @@ class Museum
   def admit(patron)
     @patrons << patron
   end
+
+  def select_interested_patrons(exhibit)
+    @patrons.select do |patron|
+      patron.interests.include?(exhibit.name)
+    end
+  end
+
+  def patrons_by_exhibit_interest
+    grouping = {}
+    @exhibits.each do |exhibit|
+      grouping[exhibit] = select_interested_patrons(exhibit)
+    end
+    grouping
+  end
 end
