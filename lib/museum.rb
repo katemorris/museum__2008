@@ -4,7 +4,7 @@ class Museum
   def initialize(name)
     @name = name
     @exhibits = []
-    patrons = []
+    @patrons = []
   end
 
   def add_exhibit(exhibit)
@@ -15,5 +15,9 @@ class Museum
     @exhibits.select do |exhibit|
       patron.interests.include?(exhibit.name)
     end
+  end
+
+  def admit(patron)
+    @patrons << patron
   end
 end
